@@ -53,16 +53,19 @@ The feedback mechanism from ocean to atmosphere is parameterized as a mass flux 
 
 $$J_{SSA} = E_{SSA}(U_{10}) \cdot F_{enrich} \cdot C_{water}$$
 
-### 3. Trophic Bioamplification Chain
-Multi-species toxicokinetics must be resolved sequentially through the food chain layers, mapping how concentration amplifies from prey to predator:
+### 3. Multi-Species Trophic Bioamplification Matrix
+To simulate realistic bioamplification across branched ecological networks rather than idealized linear chains, the steady-state tissue concentration vector $C_{tissue}$ is resolved simultaneously using an adjacency-weighted, column-stochastic dietary preference matrix $D$:
 
-$$BAF_n = \prod_{m=1}^{n} \frac{k_{1,m}}{k_{2,m} + k_{repro,m}}$$
+$$C_{tissue} = (K_2 + K_{repro} - D * K_1)^{-1} * (k_{env} * C_{env})$$
+
+where $K_1$ and $K_2$ are diagonal matrices representing species-specific uptake and depuration kinetics, $K_{repro}$ accounts for metabolic dilution via reproductive growth, and $k_{env}$ represents direct uptake vectors from abiotic environmental compartments ($C_{env}$, e.g., water).
 
 ### 4. Non-Linear Fecundity Tipping Point (The Hill Function)
-To simulate demographic collapse, the primary species reproduction rate ($\alpha$) responds non-linearly to internal tissue exposure ($C$). The critical threshold is governed by the median effective concentration ($EC_{50}$):
+To simulate dynamic demographic collapse and macro-ecological regression, the reproduction rate of each individual species ($\alpha_n$) responds non-linearly to its specific tissue concentration component ($C_{tissue,n}$) derived from the matrix solver:
 
-$$\alpha(C) = \alpha_0 \cdot \left(1 - \frac{C^\eta}{EC_{50}^\eta + C^\eta}\right)$$
+$$\alpha(C_{tissue,n}) = \alpha_0 \cdot \left(1 - \frac{C_{tissue,n}^\eta}{EC_{50,n}^\eta + C_{tissue,n}^\eta}\right)$$
 
+where $\alpha_0$ is the baseline unexposed fecundity rate, and $EC_{50,n}$ is the species-specific median effective concentration driving critical endocrine disruption threshold.
 ---
 
 ## 🛠️ Call for Code: How to Contribute
@@ -75,7 +78,8 @@ Our goal is to empower the community to model these critical ecotoxicological ti
 *   [ ] Write the core ODE system (`core_solver.py`) mapping the 5 compartments and coupling mass to concentration ($C_i = M_i / V_i$).
 *   [ ] Implement parameter matrices for short-chain alternatives (GenX, ADONA) utilizing available $K_{ia}$ interfacial data, accounting for empirical gaps.
 *   [ ] Integrate climate-driven thermal forcing ($\Delta T$) to model exponential cryosphere flushing outflux.
-*   [ ] Code the non-linear Hill functions for both bottom-up phytoplankton inhibition ($P_{primary}$) and top-down apex predator reproductive failure ($EC_{50}$).
+*   [ ] Design the multi-species trophic network matrix solver (`matrix_solver.py`) using column-stochastic dietary preference weights ($D_{nm}$).
+*   [ ] Code the non-linear Hill functions responding directly to individual components of the tissue concentration vector ($C_{tissue,n}$).
 *   [ ] Build a visualization dashboard (Matplotlib/Dash) to plot global trophic downgrading trajectories against cumulative multi-species exposure.
 
 If you are a student, researcher, or developer who understands the gravity of planetary boundaries degradation, feel free to fork this repository, submit pull requests, or use this structure for your own peer-reviewed publications.
