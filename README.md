@@ -79,3 +79,7 @@ Our goal is to empower the community to model these critical ecotoxicological ti
 If you are a student, researcher, or developer who understands the gravity of planetary boundaries degradation, feel free to fork this repository, submit pull requests, or use this structure for your own peer-reviewed publications.
 
 **The relay baton is passed.**
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
