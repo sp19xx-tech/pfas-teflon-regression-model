@@ -72,9 +72,11 @@ This is an **unfunded, independent open-source initiative**. We invite data scie
 Our goal is to empower the community to model these critical ecotoxicological tipping points and bring this conceptual architecture into practical, actionable research.
 
 ### Development Priorities:
-*   [ ] Write the core ODE system (`core_solver.py`) mapping the 5 compartments.
-*   [ ] Implement parameter matrices for short-chain alternatives (GenX, ADONA) utilizing available `K_ow` and `K_oc` empirical data, accounting for existing data gaps.
-*   [ ] Build a visualization dashboard (Matplotlib/Dash) to plot population fecundity curves against cumulative multi-species exposure.
+*   [ ] Write the core ODE system (`core_solver.py`) mapping the 5 compartments and coupling mass to concentration ($C_i = M_i / V_i$).
+*   [ ] Implement parameter matrices for short-chain alternatives (GenX, ADONA) utilizing available $K_{ia}$ interfacial data, accounting for empirical gaps.
+*   [ ] Integrate climate-driven thermal forcing ($\Delta T$) to model exponential cryosphere flushing outflux.
+*   [ ] Code the non-linear Hill functions for both bottom-up phytoplankton inhibition ($P_{primary}$) and top-down apex predator reproductive failure ($EC_{50}$).
+*   [ ] Build a visualization dashboard (Matplotlib/Dash) to plot global trophic downgrading trajectories against cumulative multi-species exposure.
 
 If you are a student, researcher, or developer who understands the gravity of planetary boundaries degradation, feel free to fork this repository, submit pull requests, or use this structure for your own peer-reviewed publications.
 
