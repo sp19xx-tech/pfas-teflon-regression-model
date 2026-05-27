@@ -44,11 +44,12 @@ To translate the abstract mass-balance equations into a functional computational
 ## 📐 Key Mathematical Modules for Coders
 
 ### 1. Multimedia Mass Balance (Ordinary Differential Equations)
-The dynamic mass shifts across all five environments must be resolved simultaneously using an explicit 4th/5th order Runge-Kutta integration method (`scipy.integrate.solve_ivp` with `method='RK45'`). Note that concentration is derived as $C_i = M_i / V_i$, where $V_i$ is the compartment volume:
+The dynamic mass shifts across all five environments must be resolved simultaneously using an explicit 4th/5th order Runge-Kutta integration method (`scipy.integrate.solve_ivp` with `method='RK45'`). The anthropogenic input is dynamically driven by the global annual production volume of PFAS ($P_{global}(t)$) multiplied by a compartment-specific emission loss factor ($\epsilon_i$). Note that concentration is derived as $C_i = M_i / V_i$, where $V_i$ is the compartment volume:
 
-$$\frac{dM_i}{dt} = I_i + \sum_{j \neq i} (F_{ji} \cdot C_j) - \sum_{j \neq i} (F_{ij} \cdot C_i) - k_{deg,i} \cdot M_i - F_{sink,i}$$
+$$\frac{dM_i}{dt} = \left( P_{global}(t) \cdot \epsilon_i \right) + \sum_{j \neq i} (F_{ji} \cdot C_j) - \sum_{j \neq i} (F_{ij} \cdot C_i) - k_{deg,i} \cdot M_i - F_{sink,i}$$
 
-where $M_i$ is the mass of the PFAS species in compartment $i$ [kg], $I_i$ represents the anthropogenic emissions input [kg/year], $F_{ij}$ and $F_{ji}$ denote the volumetric bulk inter-compartment transfer flows [m3/year], $k_{deg,i}$ is the pseudo-first-order transformation rate [1/year], and $F_{sink,i}$ represents the permanent loss to terminal sinks (e.g., deep-sea sedimentation) [kg/year]. Crucially, the dynamic concentration forcing parameter $C_i$ [kg/m3] is coupled to the state variable via compartment volume ($V_i$):
+where $P_{global}(t)$ is the dynamic global annual production volume of PFAS, and $\epsilon_i$ is the compartment-specific anthropogenic emission loss factor.
+where $M_i$ is the mass of the PFAS species in compartment $i$ [kg], ($I_i$ represents the anthropogenic emissions input [kg/year]), $F_{ij}$ and $F_{ji}$ denote the volumetric bulk inter-compartment transfer flows [m3/year], $k_{deg,i}$ is the pseudo-first-order transformation rate [1/year], and $F_{sink,i}$ represents the permanent loss to terminal sinks (e.g., deep-sea sedimentation) [kg/year]. Crucially, the dynamic concentration forcing parameter $C_i$ [kg/m3] is coupled to the state variable via compartment volume ($V_i$):
 
 $$C_i = \frac{M_i}{V_i}$$
 
