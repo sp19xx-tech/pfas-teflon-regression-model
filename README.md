@@ -73,18 +73,26 @@ $$P_{primary}(C_{water}) = P_0 \cdot \left(1 - \frac{C_{water}^{\gamma}}{EC_{50,
 where $P_0$ is the pristine, undisturbed global primary productivity [kg C/year], $EC_{50, plankton}$ is the median effective concentration driving a 50% inhibition of phytoplankton photosynthetic electron transport and carbon assimilation [kg/m3], and $\gamma$ is the Hill cooperativity coefficient for the micro-algal matrix. As $C_{water}$ approaches the $EC_{50, plankton}$ threshold, the systemic energy supply fueling the upper food web collapses non-linearly, rendering higher trophic tiers highly vulnerable to energetic starvation.
 
 ### 4. Multi-Species Trophic Bioamplification Matrix
-To simulate realistic bioamplification across branched ecological networks rather than idealized linear chains, the steady-state tissue concentration vector $C_{tissue}$ is resolved simultaneously using an adjacency-weighted, column-stochastic dietary preference matrix $D$:
+To simulate realistic bioamplification across branched ecological networks, the steady-state tissue concentration vector $C_{tissue}$ is resolved simultaneously using an adjacency-weighted, column-stochastic dietary preference matrix $D$:
 
-$$C_{tissue} = (K_2 + K_{repro} - D * K_1)^{-1} * (k_{env} * C_{env})$$
-
-where $K_1$ and $K_2$ are diagonal matrices representing species-specific uptake and depuration kinetics, $K_{repro}$ accounts for metabolic dilution via reproductive growth, and $k_{env}$ represents direct uptake vectors from abiotic environmental compartments ($C_{env}$, e.g., water).
+$$\mathbf{C_{tissue}} = \left( \mathbf{K_2} + \mathbf{K_{repro}} - \mathbf{D} \odot \mathbf{K_1} \right)^{-1} \times \left( \mathbf{k_{env}} \odot \mathbf{C_{env}} \right)$$
 
 ### 5. Non-Linear Fecundity Tipping Point (The Hill Function)
-To simulate dynamic demographic collapse and macro-ecological regression, the reproduction rate of each individual species ($\alpha_n$) responds non-linearly to its specific tissue concentration component ($C_{tissue,n}$) derived from the matrix solver:
+To simulate dynamic demographic collapse, the reproduction rate of each individual species ($\alpha_n$) responds non-linearly to its specific tissue concentration component derived from the matrix solver:
 
 $$\alpha(C_{tissue,n}) = \alpha_0 \cdot \left(1 - \frac{C_{tissue,n}^\eta}{EC_{50,n}^\eta + C_{tissue,n}^\eta}\right)$$
 
-where $\alpha_0$ is the baseline unexposed fecundity rate, and $EC_{50,n}$ is the species-specific median effective concentration driving critical endocrine disruption threshold.
+### 6. Coupled Climate-Carbon-Acidification Feedbacks
+When net primary productivity ($P_{primary}$) drops, the biological carbon pump fails, driving accelerated global warming trajectories ($d(\Delta T)/dt$) and intense ocean acidification ($dpH/dt$):
+
+$$\frac{d(\Delta T)}{dt} = R_{forcing} \cdot \left( 1 + \psi \cdot \left[ 1 - \frac{P_{primary}(C_{water})}{P_0} \right] \right) - \lambda \cdot \Delta T$$
+
+$$\frac{dpH}{dt} = -\xi \cdot \left[ 1 - \frac{P_{primary}(C_{water})}{P_0} \right] \cdot C_{atm, CO2}$$
+
+### 7. Dynamic Multi-Stressor Toxicity Synergy
+The critical toxicity thresholds ($EC_{50,n}$) respond dynamically and non-linearly to ocean acidification ($pH$) and a vector of co-occurring global anthropogenic stressors $\mathbf{S}$ (microplastics, heavy metals, surfactants, pathogens):
+
+$$EC_{50,n}(pH, \mathbf{S}) = EC_{50,n}^{baseline} \cdot \exp\left( -\delta_n \cdot (pH_{baseline} - pH) \right) \cdot \prod_{k} (1 - S_k)$$
 
 ---
 
@@ -97,9 +105,10 @@ Our goal is to empower the community to model these critical ecotoxicological ti
 ### Development Priorities:
 *   [ ] Write the core ODE system (`core_solver.py`) mapping the 5 compartments and coupling mass to concentration ($C_i = M_i / V_i$).
 *   [ ] Implement parameter matrices for short-chain alternatives (GenX, ADONA) utilizing available $K_{ia}$ interfacial data, accounting for empirical gaps.
-*   [ ] Integrate climate-driven thermal forcing ($\Delta T$) to model exponential cryosphere flushing outflux.
+*   [ ] Integrate climate-driven thermal forcing ($\Delta T$) to model exponential cryosphere flushing outflux and planetary albedo feedback.
 *   [ ] Design the multi-species trophic network matrix solver (`matrix_solver.py`) using column-stochastic dietary preference weights ($D_{nm}$).
-*   [ ] Code the non-linear Hill functions responding directly to individual components of the tissue concentration vector ($C_{tissue,n}$).
+*   [ ] Code the coupled multi-boundary solver integrating dynamic ocean acidification ($dpH/dt$) and carbon feedback loops ($d(\Delta T)/dt$).
+*   [ ] Implement dynamic $EC_{50,n}(pH, \mathbf{S})$ response functions mapping synergistic cocktail effects (microplastics, heavy metals, surfactants, pathogens).
 *   [ ] Build a visualization dashboard (Matplotlib/Dash) to plot global trophic downgrading trajectories against cumulative multi-species exposure.
 
 If you are a student, researcher, or developer who understands the gravity of planetary boundaries degradation, feel free to fork this repository, submit pull requests, or use this structure for your own peer-reviewed publications.
