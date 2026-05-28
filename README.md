@@ -40,6 +40,43 @@ To translate the abstract mass-balance equations into a functional computational
 5.  **Compartment 5: Cryosphere ($i=5$)** – Simulates polar ice and glacier accumulation acting as a historical reservoir, capturing the "Arctic Trap" flushing events driven by planetary warming.
 
 ---
+## 🎛️ Comprehensive System Parameters & Forcing Factors (Version 6.0)
+
+To achieve a holistic representation of the Earth System, the simulator maps the dynamic interactions across four fundamental axes of the modern Anthropocene:
+
+### 1. Chemical & Abiotic Dynamics (Core Fate & Transport)
+*   **P_global(t):** Dynamic global and regional annual production/consumption volumes of PFAS (Time Series input).
+*   **\epsilon_i,z:** Compartment-specific anthropogenic emission loss factors (fractional leakage during manufacturing, use, and disposal).
+*   **M_i,z / C_i,z:** Transient mass [kg] and derived concentration [$kg/m^3$] fields across 5 environments linked via compartment volumes ($V_i$).
+*   **k_deg,i:** Pseudo-first-order environmental precursor transformation and chemical degradation kinetics.
+*   **K_ia / K_aw / K_oc:** Physicochemical partition coefficients (air-water interfacial, Henry's law, and organic carbon matrices).
+*   **F_sink,i:** Permanent terminal sink velocity parameterization (e.g., deep-sea particulate sedimentation and POC scavenging).
+
+### 2. Spatio-Temporal & Geophysical Transport Channels
+*   **Geospatial Latitudinal Zoning (z):** Spatial discretization into distinct Tropical, Temperate, and Polar macro-regions.
+*   **Flux_advection,z:** Directional mass transport driven by global atmospheric cell circulation and oceanic conveyor currents.
+*   **Q_river,z:** Dynamic seasonal volumetric river discharge exporting concentrated industrial chemical burdens through coastal deltas.
+*   **Sinusoidal Meteorological Forcing:** Time-dependent sinusoidal loops mapping seasonal precipitation, ambient temperature variations, and planetary ice-melting rates.
+*   **The "Spring Flush" Effect:** Pulse-multipliers resolving rapid, non-linear spring contaminant flushes from winter snowpacks.
+*   **J_biotech,z:** Biotic vector translocation matrices mapping mass transport via migratory fauna (anadromous fish, whales, waterfowl) across boundaries.
+
+### 3. Eco-Toxicological & Trophic Resilience Feedbacks
+*   **P_primary(C_water):** Net primary marine carbon fixation and phytoplankton productivity response function.
+*   **EC_50,plankton:** Critical median effective concentration driving non-linear inhibition of micro-algal photosynthesis.
+*   **D:** An $N \times N$ column-stochastic dietary preference matrix mapping realistic multi-species food web adjacency networks.
+*   **C_tissue,n:** Species-specific steady-state tissue concentration vectors derived directly through matrix inversion.
+*   **\alpha(C_tissue,n):** Non-linear Hill-regulatory population fecundity response function tracking top-down multi-species demographic collapse.
+*   **EC_50,n:** Species-specific critical thresholds for endocrine disruption, systemic metabolic strain, and reproductive failure.
+*   **Cascading Trophic Resonance:** Structural node-deletion trigger executing automated prey-to-predator dietary weight redistribution when single-species biomass falls below a critical threshold ($M_{min}$).
+
+### 4. Technosphere, Multi-Sector Energy, & Geopolitical Shocks
+*   **d[O_3]/dt & UV-B Forcing:** Stratospheric ozone depletion rates and subsequent ultraviolet surface irradiance surges driven by high-frequency heavy aerospace launch regimes ( SpaceX Starship / Chinese Long March fleets > 1 launch/hour).
+*   **S_nuclear:** Stochastic radionuclide contamination risk multipliers tracking spent nuclear fuel (SNF) storage vulnerability under climate-driven extreme weather.
+*   **S_heavy_metals:** Cumulative body burdens of mercury, lead, and acid-precipitation compounds originating from Thermal Power Plants (TPPs).
+*   **Hydro-Fragmentation:** Geopolitical and infrastructural fragmentation constants altering regional river networks and trapping toxins.
+*   **Albedo Alteration (Dry-Land & Marine):** Regional surface albedo degradation driven by macro-scale photovoltaic solar fields, onshore/offshore wind clusters, and dark-water microbial/invasive algal blooms.
+*   **E_pathogen(t):** Exponential global pathogen pressure function tracking PFAS-induced mass immunosuppression-driven pan-zootics, epizootics, and epiphytoties.
+*   **Geopolitical Conflict Forcing (S_conflict):** Kinetic conflict impulse functions accelerating chemical emission leakages ($\epsilon$) via unregulated military surfactant usage (AFFF), infrastructure sabotage, and the complete collapse of international environmental treaty compliance.
 
 ## 📐 Key Mathematical Modules for Coders
 
@@ -110,7 +147,12 @@ Our goal is to empower the community to model these critical ecotoxicological ti
 *   [ ] Design the multi-species trophic network matrix solver (`matrix_solver.py`) using column-stochastic dietary preference weights ($D_{nm}$).
 *   [ ] Code the coupled multi-boundary solver integrating dynamic ocean acidification ($dpH/dt$) and carbon feedback loops ($d(\Delta T)/dt$).
 *   [ ] Implement dynamic $EC_{50,n}(pH, \mathbf{S})$ response functions mapping synergistic cocktail effects (microplastics, heavy metals, surfactants, pathogens).
-*   [ ] Build a visualization dashboard (Matplotlib/Dash) to plot global trophic downgrading trajectories against cumulative multi-species exposure.
+*   [ ] Develop the geospatial multi-scale core (`spatial_core.py`) to resolve advective transport across latitudinal zones and localized urban hotspots.
+*   [ ] Code seasonal sinusoidal forcing loops (Spring Flush) and biotic vector transport matrices ($J_{biotech,z}$) for migratory bioindicators.
+*   [ ] Integrate an upper-atmosphere aerospace forcing module to simulate ozone depletion ($d[O_3]/dt$) and ultraviolet stress from high-frequency rocket launches.
+*   [ ] Implement a multi-sector energy infrastructure matrix mapping regional albedo shifts (solar/wind fields) and stochastic radionuclide stress ($S_{nuclear}$).
+*   [ ] Code the endogenous geopolitical conflict loop to dynamically accelerate emission loss factors ($\epsilon_{i,z}$) during resource scarcity and military shocks.
+*   [ ] Build a visualization dashboard (Matplotlib/Dash) to plot global trophic downgrading trajectories against cascading food web node collapses.
 
 If you are a student, researcher, or developer who understands the gravity of planetary boundaries degradation, feel free to fork this repository, submit pull requests, or use this structure for your own peer-reviewed publications.
 
