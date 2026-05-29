@@ -77,6 +77,7 @@ To achieve a holistic representation of the Earth System, the simulator maps the
 *   **Albedo Alteration (Dry-Land & Marine):** Regional surface albedo degradation driven by macro-scale photovoltaic solar fields, onshore/offshore wind clusters, and dark-water microbial/invasive algal blooms.
 *   **E_pathogen(t):** Exponential global pathogen pressure function tracking PFAS-induced mass immunosuppression-driven pan-zootics, epizootics, and epiphytoties.
 *   **Geopolitical Conflict Forcing (S_conflict):** Kinetic conflict impulse functions accelerating chemical emission leakages ($\epsilon$) via unregulated military surfactant usage (AFFF), infrastructure sabotage, and the complete collapse of international environmental treaty compliance.
+* **R_cognitive(t) / M_ego(t):** Collective Cognitive Resilience Index (R_cognitive, 0 to 1) and its derived Predatory Anti-Social Multiplier (M_ego, 1 to ∞). These dynamic variables map how neuro-toxicological degradation and existential panic trigger runaway corporate avarice. Rather than dividing resilience, M_ego(t) acts as an active, direct mathematical multiplier that exponentially amplifies industrial production leakages (P_global(t) · M_ego(t)) and kinetic geopolitical conflict vectors (S_conflict  · M_ego(t)) during terminal resource hoarding.
 
 ## 📐 Key Mathematical Modules for Coders
 
@@ -85,8 +86,7 @@ The dynamic mass shifts across all five environments must be resolved simultaneo
 
 $$\frac{dM_i}{dt} = \left( P_{global}(t) \cdot \epsilon_i \right) + \sum_{j \neq i} (F_{ji} \cdot C_j) - \sum_{j \neq i} (F_{ij} \cdot C_i) - k_{deg,i} \cdot M_i - F_{sink,i}$$
 
-where $P_{global}(t)$ is the dynamic global annual production volume of PFAS, and $\epsilon_i$ is the compartment-specific anthropogenic emission loss factor.
-where $M_i$ is the mass of the PFAS species in compartment $i$ [kg], ($I_i$ represents the anthropogenic emissions input [kg/year]), $F_{ij}$ and $F_{ji}$ denote the volumetric bulk inter-compartment transfer flows [m3/year], $k_{deg,i}$ is the pseudo-first-order transformation rate [1/year], and $F_{sink,i}$ represents the permanent loss to terminal sinks (e.g., deep-sea sedimentation) [kg/year]. Crucially, the dynamic concentration forcing parameter $C_i$ [kg/m3] is coupled to the state variable via compartment volume ($V_i$):
+where $M_i$ is the mass of the PFAS species in compartment $i$ [kg], $P_{global}(t)$ is the dynamic global annual production volume of PFAS [kg/year], and $\epsilon_i$ is the compartment-specific anthropogenic emission loss factor, $F_{ij}$ and $F_{ji}$ denote the volumetric bulk inter-compartment transfer flows [m3/year], $k_{deg,i}$ is the pseudo-first-order transformation rate [1/year], and $F_{sink,i}$ represents the permanent loss to terminal sinks (e.g., deep-sea sedimentation) [kg/year]. Crucially, the dynamic concentration forcing parameter $C_i$ [kg/m3] is coupled to the state variable via compartment volume ($V_i$):
 
 $$C_i = \frac{M_i}{V_i}$$
 
@@ -146,12 +146,14 @@ Our goal is to empower the community to model these critical ecotoxicological ti
 *   [ ] Integrate climate-driven thermal forcing ($\Delta T$) to model exponential cryosphere flushing outflux and planetary albedo feedback.
 *   [ ] Design the multi-species trophic network matrix solver (`matrix_solver.py`) using column-stochastic dietary preference weights ($D_{nm}$).
 *   [ ] Code the coupled multi-boundary solver integrating dynamic ocean acidification ($dpH/dt$) and carbon feedback loops ($d(\Delta T)/dt$).
-*   [ ] Implement dynamic $EC_{50,n}(pH, \mathbf{S})$ response functions mapping synergistic cocktail effects (microplastics, heavy metals, surfactants, pathogens).
+*   [ ] Implement dynamic $EC_{50,n}(pH, \mathbf{S})$ response functions mapping synergistic cocktail effects (microplastics, heavy metals, surfactants, pathogens) and invasive bio-aggressor expansion fronts ($B_{aggressor,z}$).
 *   [ ] Develop the geospatial multi-scale core (`spatial_core.py`) to resolve advective transport across latitudinal zones and localized urban hotspots.
 *   [ ] Code seasonal sinusoidal forcing loops (Spring Flush) and biotic vector transport matrices ($J_{biotech,z}$) for migratory bioindicators.
 *   [ ] Integrate an upper-atmosphere aerospace forcing module to simulate ozone depletion ($d[O_3]/dt$) and ultraviolet stress from high-frequency rocket launches.
 *   [ ] Implement a multi-sector energy infrastructure matrix mapping regional albedo shifts (solar/wind fields) and stochastic radionuclide stress ($S_{nuclear}$).
 *   [ ] Code the endogenous geopolitical conflict loop to dynamically accelerate emission loss factors ($\epsilon_{i,z}$) during resource scarcity and military shocks.
+*   [ ] Implement a stochastic Poisson-distribution generator to model macro-geological shock impulses (volcanic eruptions, solar fluxes, cascading food web node collapses).
+*   [ ] Code the endogenous cognitive resilience loop ($R_{cognitive}$) to derive the predatory multiplier ($M_{ego}$), implementing it as a direct mathematical amplifier for industrial production ($P_{global} \cdot M_{ego}$) and geopolitical conflict ($S_{conflict} \cdot M_{ego}$).
 *   [ ] Build a visualization dashboard (Matplotlib/Dash) to plot global trophic downgrading trajectories against cascading food web node collapses.
 
 If you are a student, researcher, or developer who understands the gravity of planetary boundaries degradation, feel free to fork this repository, submit pull requests, or use this structure for your own peer-reviewed publications.
