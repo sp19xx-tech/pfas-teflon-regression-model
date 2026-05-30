@@ -9,8 +9,8 @@ This repository contains the conceptual framework and mathematical architecture 
 
 This repository serves as the official computational implementation bridge for the theoretical pre-print:
 
-*   **Direct Ribbon Access:** [View Paper on Zenodo](https://zenodo.org/records/20418257)
-*   **Persistent DOI:** [10.5281/zenodo.20418257](https://doi.org)
+*   **Direct Ribbon Access:** [View Paper on Zenodo](https://zenodo.org/records/20466220)
+*   **Persistent DOI:** [10.5281/zenodo.20466220](https://doi.org)
 
 
 ### Citation
@@ -24,8 +24,8 @@ If you use this conceptual framework, mathematical architecture, or future code 
   month        = may,
   year         = 2026,
   publisher    = {Zenodo},
-  doi          = {10.5281/zenodo.20418257},
-  url          = {https://zenodo.org/records/20418257}
+  doi          = {10.5281/zenodo.20466220},
+  url          = {https://zenodo.org/records/20466220}
 }
 ---
 
