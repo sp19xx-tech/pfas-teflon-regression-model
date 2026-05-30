@@ -1,4 +1,4 @@
-# pfas-biosphere-model
+# pfas-teflon-regression-model
 Open-source computational framework and mathematical architecture for modeling PFAS-driven cross-trophic biosphere collapse.
 
 This repository contains the conceptual framework and mathematical architecture for a non-steady-state multimedia fate, transport, and multi-species bioamplification model. The core objective of this project is to simulate the long-term ecotoxicological tipping points driven by the continuous transgression of the "novel entities" planetary boundary by Per- and Polyfluoroalkyl Substances (PFAS).
