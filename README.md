@@ -182,7 +182,35 @@ The global annual production volume $P_{global}(t)$ and the geopolitical conflic
 * If $R_{cognitive} \rightarrow 0$ under cumulative neurotoxicology ($\omega_1$) and existential panic ($\omega_2$), $M_{ego} \rightarrow \infty$, driving exponential spikes in corporate greed, resource wars ($S_{conflict} \times M_{ego}$), and unregulated industrial contamination ($P_{global} \times M_{ego}$).
 * **Network Percolation Threshold:** The simulation tracks the population fraction maintaining $R_{cognitive} \ge 0.70$. If this sub-population density drops below 10% ($F_{res} < 0.10$), the activation key for Organized Resistance (Scenario 4) is permanently disabled in the runtime logic, locking the global system trajectory into Phase 2 (Anarchy) or Phase 3 (Biosphere Termination).
 
-### 12. Computational Implementation Details
+### 12. Spatial Patchiness & Keystone Node Specification (Calibration Guidelines)
+To transition the computational matrix from abstract global variables to a highly predictive planetary simulator, developers must implement explicit localization boundaries and rigid biological constraints within the runtime loop.
+
+#### 1. Stationary Production Vectors (Point Sources)
+The single global production variable $P_{global}(t)$ must be resolved as a spatial coordinate vector $P_z = [P_{\text{USA}}, P_{\text{EU}}, P_{\text{China}}, P_{\text{Japan}}, \dots]$ mapped strictly to known stationary industrial fluorochemical clusters (e.g., Parkersburg, Dordrecht, Antwerp, and Shandong/Jiangsu provinces). Each point source must be initialized with localized mass output capacities and compartment-specific leakage variables ($\epsilon_z$).
+
+#### 2. Verification of Concentration Hotspots & Trophic Vectors
+The core solver loop must explicitly monitor and log the generation of localized maximum concentration spikes ($C_{max}$), tracking three primary environmental and biological transit vehicles:
+1. **Surface Sea Spray Aerosols (SSA):** Operating within compartment $i=1$, acting as the primary mechanical pump recycling surfactant mass back into the atmosphere.
+2. **Hydro-Fragmented River Discharges ($Q_{river,z}$):** Trapping and hyper-accumulating regional chemical burdens inside coastal deltas and stagnant estuaries.
+3. **Faunal Bio-Vectors ($J_{biotic,z}$):** Tracking migratory indicator species (e.g., anadromous salmonids, migratory waterfowl) that pick up peak concentrations in industrial hotspots and translocate high tissue burdens directly into pristine polar catchments.
+
+#### 3. Hard-Coded Keystone Matrix Limits
+The biological substrate must not be integrated as an unyielding, homogeneous biomass variable. The core loop must compute a distinct, coupled matrix of four keystone ecological nodes ($B_1, B_2, B_3, B_4$):
+* **$B_1$ (Marine Phytoplankton):** Formulated inside the photic surface ocean layer ($i=1$); directly drives the biological carbon pump.
+* **$B_2$ (Soil Microbiota & Decompressors):** Formulated inside the terrestrial matrix ($i=4$); governs land matrix structural erosion kinetics ($k_{deg,4,z}$).
+* **$B_3$ (Insect Pollinators):** Formulated at the soil-troposphere interface; controls the reproduction and continuity of land flora.
+* **$B_4$ (Apex Consumers / Humans):** Resolved via the matrix-inversion dietary preference model ($\mathbf{C}_{\text{tissue}}$); determines macro-faunal fecundity collapse ($\alpha_0$).
+
+Net primary planetary carbon fixation and energy supply must be computed strictly as a joint product of these four autonomous variables: $P_{primary} = P_0 \cdot (B_1 \cdot B_2 \cdot B_3 \cdot B_4)$. If any single keystone node collapses ($B_i \rightarrow 0$), the planetary carrying capacity must undergo an instantaneous cascading shutdown.
+
+#### 4. Opportunistic Bio-Aggressor Proliferation (The Vacuum Effect)
+To model the terminal phase of the Teflon Regression, implement a trigger function for opportunistic bio-aggressors ($B_{aggressor,z}$, e.g., invasive jellyfish, toxic dinoflagellates, resilient fungal pathogens). When the biomass of primary keystone nodes ($B_1, B_2, B_3$) falls below a critical threshold, $B_{aggressor,z}$ must scale exponentially:
+
+$$B_{aggressor,z}(t) = B_{base} \cdot \exp\Big( \lambda_{\text{inv}} \cdot [1 - B_{\text{keystone}}(t)] \Big)$$
+
+The output of $B_{aggressor,z}$ must directly inject feedback into the multi-stressor matrix vector $S_k$, non-linearly driving down the critical toxicity thresholds ($EC_{50,n}$) of any remaining complex macro-fauna.
+
+### CID. Computational Implementation Details
 To facilitate rigorous reproducibility and scalable extension, the entire coupled non-linear ordinary differential equation (ODE) framework is structured for open-source computational execution utilizing the standard scientific computing ecosystem (Python via the NumPy and SciPy stacks). Numerical integration across all multi-scale compartments, latitudinal zones, and stochastic impulse matrices is driven by a variable-step 4th/5th order explicit Runge-Kutta solver, implemented programmatically via the `scipy.integrate.solve_ivp` routine with the `method='RK45'` parameter.
 
 ---
